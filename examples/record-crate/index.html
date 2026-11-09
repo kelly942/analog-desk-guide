@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Record crate example</title>
+<link rel="stylesheet" href="record-crate.css">
+<style>
+body{margin:0;background:#fff;color:#111;font:15px/1.5 ui-monospace,monospace;padding:24px}
+.wrap{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;max-width:1000px;margin:0 auto}
+#crate{width:min(560px,100%)}
+.info{flex:1 1 260px;max-width:420px}
+.info h2{margin:0 0 6px;text-transform:uppercase;font-size:22px}
+.info a{display:inline-block;margin-top:10px;background:#0047ab;color:#fff;padding:8px 14px;text-decoration:none;text-transform:uppercase;font-size:13px;letter-spacing:.06em}
+.note{max-width:1000px;margin:0 auto 18px;font-size:13px;opacity:.7}
+</style></head><body>
+<p class="note">Example: neutral boxes stand in for your photos. Drag sideways, use the arrow keys, or click a record.</p>
+<div class="wrap">
+  <div id="crate"></div>
+  <div class="info" id="info" aria-live="polite"></div>
+</div>
+<script src="record-crate.js"></script>
+<script>
+var records = [
+  { title: 'Project one', kind: 'Build', label: 'Cover 1', summary: 'One or two sentences about this project.', href: '#one' },
+  { title: 'Project two', kind: 'Case study', label: 'Cover 2', summary: 'What you did and what you learned.', href: '#two' },
+  { title: 'Project three', kind: 'Artifact', label: 'Cover 3', summary: 'Anything that is not a client project goes here too.', href: '#three' },
+  { title: 'Project four', kind: 'Build', label: 'Cover 4', summary: 'Add as many records as you have projects.', href: '#four' }
+];
+var info = document.getElementById('info');
+function show(i) {
+  var r = records[i];
+  info.innerHTML = '<p>' + r.kind + '</p><h2>' + r.title + '</h2><p>' + r.summary + '</p><a href="' + r.href + '">Open</a>';
+}
+recordCrate(document.getElementById('crate'), records, {
+  onSelect: show,
+  onActivate: function (i) { location.href = records[i].href; },
+  // Placeholder layers. With real photos, delete these two lines and put crate-back.webp / crate-front.webp next to this file.
+  backHTML: '<div class="rcback ph">Photo needed: crate, back layer</div>',
+  frontHTML: '<div class="rcfront ph">Photo needed: crate, front layer</div>'
+});
+</script></body></html>

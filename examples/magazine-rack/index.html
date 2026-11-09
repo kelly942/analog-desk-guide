@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Magazine rack example</title>
+<link rel="stylesheet" href="magazine-rack.css">
+</head><body>
+<p class="note" style="max-width:1000px;font-size:13px;opacity:.7">Example: grey boxes stand in for your shelf photo and your Substack covers. Click a cover to see its details.</p>
+<main id="rack"></main>
+<script src="magazine-rack.js"></script>
+<script>
+// Sample data in the same shape sync/sync-substack.mjs writes to substack.json.
+var posts = [];
+for (var i = 1; i <= 9; i++) posts.push({ id: i, slug: 'post-' + i, title: 'Post title ' + i, date: '2026-0' + (i % 9 + 1) + '-01',
+  subtitle: 'A one-line subtitle for post ' + i + '.', url: '#post-' + i, free: i % 2 === 0, image: null, width: 720, height: 900 });
+magazineRack(document.getElementById('rack'), { publication: '#', posts: posts }, { shelf: null });
+</script>
+</body></html>

@@ -1,0 +1,22 @@
+:root { --ink: #111; --accent: #0047AB; }
+body { margin: 0; padding: 24px; font: 16px/1.5 system-ui, sans-serif; color: var(--ink); background: #fff; }
+.nsbar { display: flex; align-items: center; width: min(1000px, 100%); margin-bottom: 12px; }
+.nsbar .cnt { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; }
+.nsbar a { margin-left: auto; background: var(--accent); color: #fff; padding: 6px 14px; text-decoration: none; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.ledgeWrap { width: min(1000px, 100%); margin: 0 0 18px; }
+/* padding-top makes room for tall covers; --rise is set per row by the script */
+.ledge { position: relative; container-type: inline-size; padding-top: calc(var(--rise, 0) * 1%); filter: drop-shadow(0 8px 14px rgba(17, 17, 17, .22)); }
+.ledgeimg { display: block; width: 100%; height: auto; }
+/* the shelf photo is drawn twice: once behind the covers, once in front, clipped to just the lip, so covers sit behind it */
+.ledgeimg.front { position: absolute; left: 0; bottom: 0; clip-path: inset(79% 0 0 0); z-index: 3; pointer-events: none; }
+.covers { position: absolute; left: 5%; right: 5%; bottom: 2.4cqw; display: flex; gap: 1.5%; align-items: flex-end; z-index: 2; }
+.cvr { position: relative; background: none; border: 0; padding: 0; cursor: pointer; transform: rotate(var(--r, 0deg)); transform-origin: bottom center; transition: transform .3s cubic-bezier(.3, 1.4, .5, 1); }
+.cvr img { display: block; height: calc(var(--h) * 1cqw); width: auto; box-shadow: 0 2px 8px rgba(17, 17, 17, .35); }
+.cvr:hover, .cvr:focus-visible, .cvr.on { transform: translateY(-6%) scale(1.06) rotate(0deg); z-index: 5; }
+.cvr.on { outline: 3px solid var(--accent); outline-offset: 3px; }
+.preview { max-width: 520px; padding: 12px 0; }
+.preview a { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .cvr { transition: none; } }
+/* placeholder shown until you add a real cover */
+.cvr .ph { display: flex; align-items: center; justify-content: center; height: calc(var(--h) * 1cqw); background: #d9d9d9; color: #555; font: 600 1cqw/1.1 ui-monospace, monospace; text-align: center; box-shadow: 0 2px 8px rgba(17, 17, 17, .35); }
+.shelfph { display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 12px 6px 0; box-sizing: border-box; white-space: nowrap; width: 100%; aspect-ratio: 1400 / 275; background: #e6e6e6; color: #555; font: 600 14px ui-monospace, monospace; }

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arrange mode example</title>
+<style>
+body{margin:0;background:#fff;color:#111;font:14px/1.4 ui-monospace,monospace}
+.bar{position:sticky;top:0;z-index:100;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fff;border-bottom:2px solid #111;padding:10px 16px}
+button{background:#0047ab;color:#fff;border:0;padding:8px 14px;font:inherit;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
+textarea{width:100%;max-width:560px;font:12px ui-monospace,monospace}
+/* The canvas keeps a fixed shape, so percentages mean the same thing everywhere. */
+#canvas{position:relative;width:100%;max-width:1000px;aspect-ratio:1200/1000;margin:0 auto;overflow:hidden;background:#fff}
+.obj{position:absolute;display:grid;place-content:center;text-align:center;background:#e4e4e0;border:1px dashed #999;font-size:11px;text-transform:uppercase;cursor:grab;touch-action:none;user-select:none}
+.obj.drag{cursor:grabbing;box-shadow:0 8px 20px rgba(17,17,17,.25)}
+</style></head><body>
+<div class="bar"><b>Arrange mode</b><span>Drag the boxes, then press the button.</span><button id="get" type="button">Get layout</button><span id="msg" role="status"></span>
+<textarea id="out" rows="4" hidden readonly aria-label="Layout to copy"></textarea></div>
+<div id="canvas">
+  <div class="obj" data-key="notebook" style="left:8%;top:12%;width:14%;height:28%">Photo needed<br>notebook</div>
+  <div class="obj" data-key="phone"    style="left:34%;top:8%;width:20%;height:18%">Photo needed<br>phone</div>
+  <div class="obj" data-key="crate"    style="left:60%;top:30%;width:26%;height:34%">Photo needed<br>crate</div>
+  <div class="obj" data-key="globe"    style="left:14%;top:56%;width:14%;height:26%">Photo needed<br>globe</div>
+</div>
+<script src="arrange.js"></script></body></html>

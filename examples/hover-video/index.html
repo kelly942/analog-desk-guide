@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hover-to-spin example</title>
+<style>
+body{margin:0;background:#fff;color:#111;font:15px/1.5 ui-monospace,monospace;padding:24px}
+p{max-width:560px}
+/* The whole trick: the video has a pure white background, and multiply blending makes white see-through. */
+.spin{display:block;width:260px;background:none;border:0;padding:0;cursor:pointer;mix-blend-mode:multiply}
+.spin video{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+.spin:focus-visible{outline:3px solid #0047ab;outline-offset:6px}
+.spot{display:flex;gap:40px;align-items:center;flex-wrap:wrap;padding:30px;background:#fff}
+.ph{width:100%;aspect-ratio:1;background:#d9d9d9;display:grid;place-content:center;font-size:12px;font-weight:600;color:#555}
+.card{width:160px;height:120px;background:#e4e4e0;display:grid;place-content:center;font-size:11px;text-transform:uppercase}
+</style></head><body>
+<p>Example: a grey box stands in for your video. Once you add one, hover (or tab to) it and it plays; move away and it pauses. The card behind it shows the white background is gone: your object overlaps the card with no box around it. Without a video the box just sits there.</p>
+<div class="spot">
+  <div class="card">Something behind it</div>
+  <button class="spin" id="spin" aria-label="Your video object" style="margin-left:-90px">
+    <!-- VIDEO NEEDED. Add your own video (see make-video.sh), then delete the grey box and uncomment the video:
+    <video muted loop playsinline preload="metadata" poster="your-video.jpg"><source src="your-video.mp4" type="video/mp4"></video>
+    -->
+    <div class="ph">VIDEO NEEDED</div>
+  </button>
+</div>
+<script>
+var vid = document.querySelector('#spin video'), btn = document.getElementById('spin');
+// People who ask their device for less motion get the still poster and nothing plays.
+if (vid && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  btn.addEventListener('mouseenter', function () { vid.play().catch(function () {}); });
+  btn.addEventListener('mouseleave', function () { vid.pause(); });
+  btn.addEventListener('focus', function () { vid.play().catch(function () {}); });
+  btn.addEventListener('blur', function () { vid.pause(); });
+}
+// On a phone there is no hover. Play on tap instead.
+btn.addEventListener('click', function () { if (vid && matchMedia('(hover: none)').matches) { vid.paused ? vid.play().catch(function () {}) : vid.pause(); } });
+</script></body></html>
